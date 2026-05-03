@@ -48,21 +48,23 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         String format = plugin.getConfig().getString("messages.join", "&a+ &7{PLAYER}");
-        event.joinMessage(MessageUtils.LEGACY.deserialize(MessageUtils.format(replacePlaceholders(format, event.getPlayer()))));
+        event.joinMessage(MessageUtils.LEGACY.deserialize(MessageUtils.format(replacePlaceholders(format, event.getPlayer(), 0))));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         String format = plugin.getConfig().getString("messages.quit", "&c- &7{PLAYER}");
-        event.quitMessage(MessageUtils.LEGACY.deserialize(MessageUtils.format(replacePlaceholders(format, event.getPlayer()))));
+        event.quitMessage(MessageUtils.LEGACY.deserialize(MessageUtils.format(replacePlaceholders(format, event.getPlayer(), -1))));
     }
 
-    private String replacePlaceholders(String format, Player player) {
+    private String replacePlaceholders(String format, Player player, int offset) {
+        int onlineCount = Bukkit.getOnlinePlayers().size() + offset;
+
         return MessageUtils.translateAlternateColorCodes('&', format)
                 .replace("{PREFIX}", MessageUtils.translateAlternateColorCodes('&', getVaultPrefix(player)))
                 .replace("{SUFFIX}", MessageUtils.translateAlternateColorCodes('&', getVaultSuffix(player)))
                 .replace("{PLAYER}", player.getName())
-                .replace("{ONLINE}", String.valueOf(Bukkit.getOnlinePlayers().size()))
+                .replace("{ONLINE}", String.valueOf(onlineCount))
                 .replace("{MAX}", String.valueOf(Bukkit.getServer().getMaxPlayers()));
     }
 }
