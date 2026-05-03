@@ -1,8 +1,8 @@
 package dev.basarts.prefixmanager;
 
 import dev.basarts.prefixmanager.Listeners.Listeners;
+import dev.basarts.prefixmanager.Utils.UpdateChecker;
 import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault2.chat.ChatUnlocked;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,12 +22,13 @@ public final class Main extends JavaPlugin {
         } else {
             getLogger().severe("No Chat service found! Ensure a permission plugin (like LuckPerms) is handling Vault.");
         }
+
+        new UpdateChecker(this).checkForUpdate();
     }
 
     private boolean setupChat() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) return false;
 
-        // On cherche l'interface Chat classique (net.milkbowl.vault.chat.Chat)
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
         if (rsp != null) {
             chat = rsp.getProvider();
