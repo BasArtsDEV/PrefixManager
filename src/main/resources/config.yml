@@ -1,0 +1,24 @@
+# ==========================================
+#         PrefixManager Configuration
+# ==========================================
+
+# Chat Formatting
+chat:
+  # The layout of the chat message
+  # Placeholders: {PREFIX}, {PLAYER}, {SUFFIX}, {MESSAGE}
+  # Note: Use & for color codes (e.g., &6 for Gold)
+  format: "<gradient:#eb8c34:#e0c80b><bold> Chat |</bold></gradient> {PREFIX}{PLAYER}{SUFFIX} &e» &r{MESSAGE}"
+
+# Connection Messages
+messages:
+  # Set to "none" to disable join/quit messages
+  # Placeholders: {PREFIX}, {PLAYER}, {SUFFIX}, {ONLINE}, {MAX}
+
+  # Message displayed when a player joins the server
+  join: "&a&l┃ &f{PREFIX}{PLAYER} &7joined &8&l» &a&l{ONLINE}/{MAX}"
+  quit: "&c&l┃ &f{PREFIX}{PLAYER} &7left &8&l» &c&l{ONLINE}/{MAX}"
+
+# Advanced Settings
+settings:
+  # Enable debug messages in the console
+  debug: false

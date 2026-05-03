@@ -3,7 +3,11 @@ description: $description
 version: '${version}'
 
 main: dev.basarts.prefixmanager.Main
-api-version: '26.1.2'
 load: POSTWORLD
 
 authors: [ BasArts ]
+
+depend:
+  - Vault
+softdepend:
+  - LuckPerms
